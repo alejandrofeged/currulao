@@ -7,6 +7,8 @@ navbar:
       href: index.html
     - text: "About Me"
       href: about.html
+    - text: "CV"
+      href: https://alejandrofeged.github.io/currulao/hv.pdf
     - text: "Projects"     ##### the new
       href: projects.html  ##### stuff
     - text: "Blog"
