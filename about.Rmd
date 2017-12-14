@@ -3,10 +3,7 @@ title: "About Me"
 ---
 
 # [Datos curiosos,CVlac](http://scienti.colciencias.gov.co:8081/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000031627)
-- Profesor Asistente
-Universidad del Rosario
-Ciencia Política y Gobierno
-Gestión y desarrollo urbanos
+- Profesor Asistente en la Universidad del Rosario, en la facultad de Ciencia Política y Gobierno, en el programa de Gestión y desarrollo urbanos.
 
 # Contacto
 
