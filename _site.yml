@@ -11,7 +11,8 @@ navbar:
       href: projects.html  ##### stuff
     - text: "Blog"
       href: http://www.supercontra.blogspot.com
-    - text: [Teaching](http://www.chuchoelpelicano.blogspot.com)
+    - text: Teaching
+      href: http://www.chuchoelpelicano.blogspot.com
        
      
      
