@@ -8,7 +8,13 @@ navbar:
     - text: "About Me"
       href: about.html
     - text: "Projects"     ##### the new
-      href: projects.html  ##### stuff      
+      href: projects.html  ##### stuff
+    - text: "Blog"
+     href: www.supercontra.blogspot.com
+   - text: "Teaching"
+     href: www.chuchoelpelicano.blogspot.com
+     
+     
 output:
   html_document:
     theme: flatly
