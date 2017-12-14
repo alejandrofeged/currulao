@@ -10,9 +10,9 @@ navbar:
     - text: "Projects"     ##### the new
       href: projects.html  ##### stuff
     - text: "Blog"
-     href: www.supercontra.blogspot.com
-   - text: "Teaching"
-     href: www.chuchoelpelicano.blogspot.com
+      href: http://www.supercontra.blogspot.com
+    - text: [Teaching](http://www.chuchoelpelicano.blogspot.com)
+       
      
      
 output:
