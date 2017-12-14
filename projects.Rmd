@@ -2,16 +2,18 @@
 title: "Projects"
 ---
 
-Sometimes I like to do projects and then post them on the internet for the whole world to benefit!
-here's some examples. 
+Me gusta explorar muchos temas diferentes. Actualmente colaboro con personas que admiro y son buenos amigos. 
 
-## [Data Visualization in R](http://nickstrayer.me/visualization_in_r/)
+## Violencia
 
-- An RMarkdown presentation on the common mistakes made in visualization and how to fix them.
-- Includes a github repo for access to all the code.
-- Look at how high quality my work is, hire and or collaborate with me. 
+- Violencia digital, en conjunto con Quantil, participé en el primer estudio de violencia digital en Colombia (que nosotros sepamos). Fue un ejercicio muy interesante, combinando teoría de redes, inteligencia artificial, y preguntas de ciencias sociales.
 
-## [Statistical Plots](http://bl.ocks.org/nstrayer/37a503dd1db369a8f7e3ce21757e19ee)
+- Violencia y ecología en Bogotá, en conjunto con varios colegas de Biología, analizamos la relación que hay entre factores ecológicos y sociales en Bogotá, con particular interés a los homicidios y la estructura del arbolado urbano.
 
-- Interactive plots of things
-- I can code!
+- Violencia contra la mujer, en conjunto con Iván Chaparro, de la Tadeo, y varios colectivos, hemos trabajado con talleres de Design Thinking y análisis de datos para visibilizar los mecanismos de confrontación de las mujeres frente a la violencia de género. Combinamos elementos de ciencia de datos, graffiti, hip-hop, y la sicología Gestalt para intervenir un punto crítico identificado por cartografía social. 
+
+## [Malaria](https://searchworks.stanford.edu/view/11586195)
+
+- Caracterización de la intensidad de la malaria en Colombia, implementando un algoritmo de detección de brotes (cociente de verosimilitud) y el análisis topológico de datos (TDA en inglés).
+- Etnografía de un parásito, con métodos de etnografía cuantitativa hice un análisis de los perfiles de riesgo de contraer malaria en los Nükak de Aguabonita, en San José del Guaviare. 
+- Malaria Peri-urbana, con una combinación de métodos estadísticos y demográficos, hice un análisis de las transiciones epidémicas y demográficas que suceden en las áreas peri-urbanas en ciudades colombianas de menos de 50,000 habitantes.
