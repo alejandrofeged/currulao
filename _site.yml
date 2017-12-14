@@ -1,0 +1,9 @@
+name: "Alejandro Feged-Rivadeneira"
+output_dir: "."
+navbar:
+  title: "Alejandro Feged-Rivadeneira"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "About Me"
+      href: about.html
