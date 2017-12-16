@@ -4,7 +4,7 @@ title: "Projects"
 
 Me gusta explorar muchos temas diferentes. Actualmente colaboro con personas que admiro y son buenos amigos. 
 
-## Violencia
+# Violencia
 
 - Violencia digital, en conjunto con Quantil, participé en el primer estudio de violencia digital en Colombia (que nosotros sepamos). Fue un ejercicio muy interesante, combinando teoría de redes, inteligencia artificial, y preguntas de ciencias sociales.
 
@@ -12,8 +12,10 @@ Me gusta explorar muchos temas diferentes. Actualmente colaboro con personas que
 
 - Violencia contra la mujer, en conjunto con Iván Chaparro, de la Tadeo, y varios colectivos, hemos trabajado con talleres de Design Thinking y análisis de datos para visibilizar los mecanismos de confrontación de las mujeres frente a la violencia de género. Combinamos elementos de ciencia de datos, graffiti, hip-hop, y la sicología Gestalt para intervenir un punto crítico identificado por cartografía social. 
 
-## [Malaria](https://searchworks.stanford.edu/view/11586195)
+# [Malaria](https://searchworks.stanford.edu/view/11586195)
 
-- Caracterización de la intensidad de la malaria en Colombia, implementando un algoritmo de detección de brotes (cociente de verosimilitud) y el análisis topológico de datos (TDA en inglés).
+- Caracterización de la intensidad de la malaria en Colombia, implementando un algoritmo de detección de brotes (cociente de verosimilitud) y el análisis topológico de datos (TDA en inglés). [Draft](https://arxiv.org/pdf/1710.00317.pdf)
+
 - Etnografía de un parásito, con métodos de etnografía cuantitativa hice un análisis de los perfiles de riesgo de contraer malaria en los Nükak de Aguabonita, en San José del Guaviare. 
+
 - Malaria Peri-urbana, con una combinación de métodos estadísticos y demográficos, hice un análisis de las transiciones epidémicas y demográficas que suceden en las áreas peri-urbanas en ciudades colombianas de menos de 50,000 habitantes.
