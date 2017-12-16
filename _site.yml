@@ -5,15 +5,15 @@ navbar:
   left:
     - text: "Home"
       href: index.html
-    - text: "About Me"
+    - text: "Datos curiosos"
       href: about.html
     - text: "CV"
       href: https://alejandrofeged.github.io/currulao/hv.pdf
-    - text: "Projects"     ##### the new
+    - text: "Proyectos"     ##### the new
       href: projects.html  ##### stuff
     - text: "Blog"
       href: http://www.supercontra.blogspot.com
-    - text: Teaching
+    - text: "Clases"
       href: http://www.chuchoelpelicano.blogspot.com
        
      

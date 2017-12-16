@@ -1,5 +1,5 @@
 ---
-title: "Projects"
+title: "Proyectos"
 ---
 
 Me gusta explorar muchos temas diferentes. Actualmente colaboro con personas que admiro y son buenos amigos. 
@@ -10,7 +10,7 @@ Me gusta explorar muchos temas diferentes. Actualmente colaboro con personas que
 
 - Violencia y ecología en Bogotá, en conjunto con varios colegas de Biología, analizamos la relación que hay entre factores ecológicos y sociales en Bogotá, con particular interés a los homicidios y la estructura del arbolado urbano.
 
-- Violencia contra la mujer, en conjunto con Iván Chaparro, de la Tadeo, y varios colectivos, hemos trabajado con talleres de Design Thinking y análisis de datos para visibilizar los mecanismos de confrontación de las mujeres frente a la violencia de género. Combinamos elementos de ciencia de datos, graffiti, hip-hop, y la sicología Gestalt para intervenir un punto crítico identificado por cartografía social. 
+- Violencia contra la mujer, en conjunto con [Iván Chaparro](http://resonar.net/), de la Tadeo, y varios colectivos, hemos trabajado con talleres de Design Thinking y análisis de datos para visibilizar los mecanismos de confrontación de las mujeres frente a la violencia de género. Combinamos elementos de ciencia de datos, graffiti, hip-hop, y la sicología Gestalt para intervenir un punto crítico identificado por cartografía social. [Acá](https://goo.gl/forms/xlrekGNRtlhzBdDs1) puedes hacer una encuesta para ayudar con la caracterización del fenómeno. 
 
 # [Malaria](https://searchworks.stanford.edu/view/11586195)
 
