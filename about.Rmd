@@ -2,7 +2,8 @@
 title: "Pero, ¿quién es?"
 ---
 
-![](comic.JPG) 
+![](comic.JPG)
+
 
 # [Datos curiosos,CVlac](http://scienti.colciencias.gov.co:8081/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000031627)
 > Profesor Asistente en la Universidad del Rosario, en la facultad de Ciencia Política y Gobierno, en el programa de Gestión y desarrollo urbanos.
@@ -21,4 +22,4 @@ title: "Pero, ¿quién es?"
 
 En una vida pasada trabajé en primates. Muchos todavía me preguntan si sigo en eso. Yo creo que sí. Acá un dibujo (o retrato, acaso) que hizo William Vargas, un estudiante con quien he trabajado los últimos años.
 
-[](mico.png)
+![](mico.png)
