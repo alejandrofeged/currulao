@@ -8,7 +8,7 @@ navbar:
     - text: "Datos curiosos"
       href: about.html
     - text: "CV"
-      href: https://alejandrofeged.github.io/currulao/hv.pdf
+      href: https://www.dropbox.com/s/af0xviuf92teqb7/hv.pdf?dl=0
     - text: "Proyectos"     ##### the new
       href: projects.html  ##### stuff
     - text: "Blog"
