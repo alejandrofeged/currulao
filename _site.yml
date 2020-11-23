@@ -8,7 +8,7 @@ navbar:
     - text: "Datos curiosos"
       href: about.html
     - text: "CV"
-      href: https://bit.ly/2UdsWEN
+      href: https://bit.ly/3629Sml
     - text: "Proyectos"     ##### the new
       href: projects.html  ##### stuff
     - text: "Blog"
