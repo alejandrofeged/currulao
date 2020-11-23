@@ -1,0 +1,1053 @@
+dbClearResult(rs)
+rs2 = dbSendQuery(mydb, "SELECT locations_prod.velocity as vel, YEAR(FROM_UNIXTIME(locations_prod.timestamp+946684800)) as yeart, locations_prod.latitude/ 1e7 as latitude, locations_prod.longitude/ 1e7 as longitude, activity,HOUR(FROM_UNIXTIME(locations_prod.timestamp+946684800)) as hourt #
+FROM locations_prod#
+WHERE locations_prod.velocity IS NOT NULL && locations_prod.velocity > 0 && locations_prod.activity IS NOT NULL && locations_prod.activity = 'INV' && YEAR(FROM_UNIXTIME(locations_prod.timestamp+946684800)) >= 2017")#
+#
+data2 = fetch(rs2, n=35000)
+dbClearResult(rs2)#
+data2 <- filter(data2, hourt >= 7)#
+data2 <- filter(data2, hourt <= 18)#
+data2$qq=as.integer(cut(data2$vel,quantile(data2$vel)))
+coordinates(data2)=with(data2,cbind(longitude,latitude))#
+ma2 <- raster(ncol = 250, nrow = 250)#
+extent(ma2) <- extent(pts)#
+ma2 <- rasterize(data2, ma2, data$qq, fun = mean)#
+plot(ma2)
+coordinates(data2)=with(data2,cbind(longitude,latitude))#
+ma2 <- raster(ncol = 250, nrow = 250)#
+extent(ma2) <- extent(pts)#
+ma2 <- rasterize(data2, ma2, data$vel, fun = mean)#
+plot(ma2)
+coordinates(data2)=with(data2,cbind(longitude,latitude))#
+ma2 <- raster(ncol = 250, nrow = 250)#
+extent(ma2) <- extent(pts)#
+ma2 <- rasterize(data2, ma2, data$vel, fun = mean)#
+plot(log(ma2))
+coordinates(data2)=with(data2,cbind(longitude,latitude))#
+ma2 <- raster(ncol = 250, nrow = 250)#
+extent(ma2) <- extent(pts)#
+ma2 <- rasterize(data2, ma2, data$vel, fun = mean)#
+plot(log(ma2)-log(ma))
+ma <- rasterize(data, ma, data$vel, fun = mean)#
+plot(ma)
+head(data)
+ma <- rasterize(data, ma, data$vel, fun = mean)#
+plot(ma)
+coordinates(data)=with(data,cbind(longitude,latitude))#
+ma <- raster(ncol = 250, nrow = 250)#
+extent(ma) <- extent(pts)#
+ma <- rasterize(data, ma, data$qq, fun = mean)#
+plot(ma)
+plot(log(ma2)-log(ma))
+plot(log(ma)-log(ma2))
+40-80
+plot(log(ma2)-log(ma))
+dif <- log(ma2)-log(ma)#
+ddd=as.data.frame(dif,xy=TRUE)#
+ddd=ddd[complete.cases(ddd),]
+ggmap(map)+ geom_point(data = ddd, aes(x = x, y = y, color = layer), alpha = 0.3)+#
+  scale_colour_gradient(low = "blue", high = "red", guide = guide_legend(title = "Velocity"))
+map <- get_map("Bogota", zoom = 12, source = 'stamen', maptype = "toner")
+ggmap(map)+ geom_point(data = ddd, aes(x = x, y = y, color = layer), alpha = 0.3)+#
+  scale_colour_gradient(low = "blue", high = "red", guide = guide_legend(title = "Velocity"))
+plot(dif)
+rtp <- rasterToPolygons(dif)#
+rtp@data$id <- 1:nrow(rtp@data)   # add id column for join#
+#
+rtpFort <- fortify(rtp, data = rtp@data)#
+rtpFortMer <- merge(rtpFort, rtp@data, by.x = 'id', by.y = 'id')  # join data#
+#
+bm <- ggmap(get_map(location = "bogota, colombia", maptype = "hybrid", zoom = 10))#
+#
+bm + geom_polygon(data = rtpFortMer, #
+                  aes(x = long, y = lat, group = group, fill = layer), #
+                  alpha = 0.5, #
+                  size = 0) +  ## size = 0 to remove the polygon outlines#
+     scale_fill_gradientn(colours = topo.colors(255))
+rtp <- rasterToPolygons(dif)#
+rtp@data$id <- 1:nrow(rtp@data)   # add id column for join#
+#
+rtpFort <- fortify(rtp, data = rtp@data)#
+rtpFortMer <- merge(rtpFort, rtp@data, by.x = 'id', by.y = 'id')  # join data#
+#
+bm <- ggmap(get_map(location = "chapinero, bogota, colombia", maptype = "hybrid", zoom = 12))#
+#
+bm + geom_polygon(data = rtpFortMer, #
+                  aes(x = long, y = lat, group = group, fill = layer), #
+                  alpha = 0.5, #
+                  size = 0) +  ## size = 0 to remove the polygon outlines#
+     scale_fill_gradientn(colours = topo.colors(255))
+head(data)
+table(data$yeart)
+table(data2$yeart)
+rtp <- rasterToPolygons(ma)#
+rtp@data$id <- 1:nrow(rtp@data)   # add id column for join#
+#
+rtpFort <- fortify(rtp, data = rtp@data)#
+rtpFortMer <- merge(rtpFort, rtp@data, by.x = 'id', by.y = 'id')  # join data#
+#
+bm <- ggmap(get_map(location = "chapinero, bogota, colombia", maptype = "hybrid", zoom = 12))#
+#
+bm + geom_polygon(data = rtpFortMer, #
+                  aes(x = long, y = lat, group = group, fill = layer), #
+                  alpha = 0.5, #
+                  size = 0) +  ## size = 0 to remove the polygon outlines#
+     scale_fill_gradientn(colours = topo.colors(255))
+rtp <- rasterToPolygons(ma2)#
+rtp@data$id <- 1:nrow(rtp@data)   # add id column for join#
+#
+rtpFort <- fortify(rtp, data = rtp@data)#
+rtpFortMer <- merge(rtpFort, rtp@data, by.x = 'id', by.y = 'id')  # join data#
+#
+#bm <- ggmap(get_map(location = "chapinero, bogota, colombia", maptype = "hybrid", zoom = 12))#
+#
+bm + geom_polygon(data = rtpFortMer, #
+                  aes(x = long, y = lat, group = group, fill = layer), #
+                  alpha = 0.5, #
+                  size = 0) +  ## size = 0 to remove the polygon outlines#
+     scale_fill_gradientn(colours = topo.colors(255))
+data2 <- filter(data2, hourt >= 7)#
+data2 <- filter(data2, hourt <= 18)#
+data2$qq=as.integer(cut(data2$vel,quantile(data2$vel)))#
+#
+coordinates(data2)=with(data2,cbind(longitude,latitude))#
+ma2 <- raster(ncol = 250, nrow = 250)#
+extent(ma2) <- extent(pts)#
+ma2 <- rasterize(data2, ma2, data$vel, fun = mean)#
+plot(ma2)
+rtp <- rasterToPolygons(ma2)#
+rtp@data$id <- 1:nrow(rtp@data)   # add id column for join#
+#
+rtpFort <- fortify(rtp, data = rtp@data)#
+rtpFortMer <- merge(rtpFort, rtp@data, by.x = 'id', by.y = 'id')  # join data#
+#
+#bm <- ggmap(get_map(location = "chapinero, bogota, colombia", maptype = "hybrid", zoom = 12))#
+#
+bm + geom_polygon(data = rtpFortMer, #
+                  aes(x = long, y = lat, group = group, fill = layer), #
+                  alpha = 0.5, #
+                  size = 0) +  ## size = 0 to remove the polygon outlines#
+     scale_fill_gradientn(colours = topo.colors(255))
+plot(ma)
+data <- filter(data, hourt >= 7)#
+data <- filter(data, hourt <= 18)#
+#
+data$qq=as.integer(cut(data$vel,quantile(data$vel)))#
+#
+coordinates(data)=with(data,cbind(longitude,latitude))#
+ma <- raster(ncol = 250, nrow = 250)#
+extent(ma) <- extent(pts)#
+ma <- rasterize(data, ma, data$vel, fun = mean)#
+plot(ma)
+rtp <- rasterToPolygons(ma)#
+rtp@data$id <- 1:nrow(rtp@data)   # add id column for join#
+#
+rtpFort <- fortify(rtp, data = rtp@data)#
+rtpFortMer <- merge(rtpFort, rtp@data, by.x = 'id', by.y = 'id')  # join data#
+#
+#bm <- ggmap(get_map(location = "chapinero, bogota, colombia", maptype = "hybrid", zoom = 12))#
+#
+bm + geom_polygon(data = rtpFortMer, #
+                  aes(x = long, y = lat, group = group, fill = layer), #
+                  alpha = 0.5, #
+                  size = 0) +  ## size = 0 to remove the polygon outlines#
+     scale_fill_gradientn(colours = topo.colors(255))
+rtp <- rasterToPolygons(log(ma))#
+rtp@data$id <- 1:nrow(rtp@data)   # add id column for join#
+#
+rtpFort <- fortify(rtp, data = rtp@data)#
+rtpFortMer <- merge(rtpFort, rtp@data, by.x = 'id', by.y = 'id')  # join data#
+#
+#bm <- ggmap(get_map(location = "chapinero, bogota, colombia", maptype = "hybrid", zoom = 12))#
+#
+bm + geom_polygon(data = rtpFortMer, #
+                  aes(x = long, y = lat, group = group, fill = layer), #
+                  alpha = 0.5, #
+                  size = 0) +  ## size = 0 to remove the polygon outlines#
+     scale_fill_gradientn(colours = topo.colors(255))
+rtp <- rasterToPolygons(log(ma2))#
+rtp@data$id <- 1:nrow(rtp@data)   # add id column for join#
+#
+rtpFort <- fortify(rtp, data = rtp@data)#
+rtpFortMer <- merge(rtpFort, rtp@data, by.x = 'id', by.y = 'id')  # join data#
+#
+#bm <- ggmap(get_map(location = "chapinero, bogota, colombia", maptype = "hybrid", zoom = 12))#
+#
+bm + geom_polygon(data = rtpFortMer, #
+                  aes(x = long, y = lat, group = group, fill = layer), #
+                  alpha = 0.5, #
+                  size = 0) +  ## size = 0 to remove the polygon outlines#
+     scale_fill_gradientn(colours = topo.colors(255))
+rtp <- rasterToPolygons(log(ma2)-log(ma))#
+rtp@data$id <- 1:nrow(rtp@data)   # add id column for join#
+#
+rtpFort <- fortify(rtp, data = rtp@data)#
+rtpFortMer <- merge(rtpFort, rtp@data, by.x = 'id', by.y = 'id')  # join data#
+#
+#bm <- ggmap(get_map(location = "chapinero, bogota, colombia", maptype = "hybrid", zoom = 12))#
+#
+bm + geom_polygon(data = rtpFortMer, #
+                  aes(x = long, y = lat, group = group, fill = layer), #
+                  alpha = 0.5, #
+                  size = 0) +  ## size = 0 to remove the polygon outlines#
+     scale_fill_gradientn(colours = topo.colors(255))
+rtp <- rasterToPolygons(log(ma2)-log(ma))#
+rtp@data$id <- 1:nrow(rtp@data)   # add id column for join#
+#
+rtpFort <- fortify(rtp, data = rtp@data)#
+rtpFortMer <- merge(rtpFort, rtp@data, by.x = 'id', by.y = 'id')  # join data#
+#
+bm <- ggmap(get_map(location = "chapinero, bogota, colombia", maptype = "toner", zoom = 13))#
+#
+bm + geom_polygon(data = rtpFortMer, #
+                  aes(x = long, y = lat, group = group, fill = layer), #
+                  alpha = 0.5, #
+                  size = 0) +  ## size = 0 to remove the polygon outlines#
+     scale_fill_gradientn(colours = topo.colors(255))
+coordinates(data)=with(data,cbind(longitude,latitude))#
+ma <- raster(ncol = 250, nrow = 250)#
+extent(ma) <- extent(pts)#
+ma <- rasterize(data, ma, data$qq, fun = mean)#
+plot(ma)
+coordinates(data2)=with(data2,cbind(longitude,latitude))#
+ma2 <- raster(ncol = 250, nrow = 250)#
+extent(ma2) <- extent(pts)#
+ma2 <- rasterize(data2, ma2, data$qq, fun = mean)#
+plot(ma2)
+rtp <- rasterToPolygons(log(ma2)-log(ma))#
+rtp@data$id <- 1:nrow(rtp@data)   # add id column for join#
+#
+rtpFort <- fortify(rtp, data = rtp@data)#
+rtpFortMer <- merge(rtpFort, rtp@data, by.x = 'id', by.y = 'id')  # join data#
+#
+bm <- ggmap(get_map(location = "chapinero, bogota, colombia", maptype = "toner", zoom = 12))#
+#
+bm + geom_polygon(data = rtpFortMer, #
+                  aes(x = long, y = lat, group = group, fill = layer), #
+                  alpha = 0.5, #
+                  size = 0) +  ## size = 0 to remove the polygon outlines#
+     scale_fill_gradientn(colours = topo.colors(255))
+rtp <- rasterToPolygons(log(ma2)-log(ma))#
+rtp@data$id <- 1:nrow(rtp@data)   # add id column for join#
+#
+rtpFort <- fortify(rtp, data = rtp@data)#
+rtpFortMer <- merge(rtpFort, rtp@data, by.x = 'id', by.y = 'id')  # join data#
+#
+bm <- ggmap(get_map(location = "chapinero, bogota, colombia", maptype = "toner", zoom = 12))#
+#
+bm + geom_polygon(data = rtpFortMer, #
+                  aes(x = long, y = lat, group = group, fill = layer), #
+                  alpha = 0.5, #
+                  size = 0) +  ## size = 0 to remove the polygon outlines#
+     scale_fill_gradientn(colours = topo.colors(255), guide = guide_legend(title = "Velocity change"))
+dif <- log(ma2)-log(ma)#
+ddd=as.data.frame(dif,xy=TRUE)#
+ddd=ddd[complete.cases(ddd),]
+ggmap(map)+ geom_point(data = ddd, aes(x = x, y = y, color = layer), alpha = 0.3)+#
+  scale_colour_gradient(low = "blue", high = "red", guide = guide_legend(title = "Velocity"))
+ggmap(map)+ geom_point(data = ddd, aes(x = x, y = y, color = layer), alpha = 0.3)+#
+  scale_colour_gradient( guide = guide_legend(title = "Velocity"))
+dif <- log(ma2)#
+ddd=as.data.frame(dif,xy=TRUE)#
+ddd=ddd[complete.cases(ddd),]
+ggmap(map)+ geom_point(data = ddd, aes(x = x, y = y, color = layer), alpha = 0.3)+#
+  scale_colour_gradient( guide = guide_legend(title = "Velocity"))
+dif <- ma2#
+ddd=as.data.frame(dif,xy=TRUE)#
+ddd=ddd[complete.cases(ddd),]
+ggmap(map)+ geom_point(data = ddd, aes(x = x, y = y, color = layer), alpha = 0.3)+#
+  scale_colour_gradient( guide = guide_legend(title = "Velocity"))
+ggmap(map)+ geom_point(data = ddd, aes(x = x, y = y, color = layer), alpha = 0.3)+#
+  scale_colour_gradient( low="red", high="green",guide = guide_legend(title = "Velocity"))
+dif <- ma#
+ddd=as.data.frame(dif,xy=TRUE)#
+ddd=ddd[complete.cases(ddd),]
+ggmap(map)+ geom_point(data = ddd, aes(x = x, y = y, color = layer), alpha = 0.3)+#
+  scale_colour_gradient( low="red", high="green",guide = guide_legend(title = "Velocity"))
+ggmap(map)+ geom_point(data = ddd, aes(x = x, y = y, color = layer), alpha = 0.3)+#
+  scale_colour_gradient( low="red", high="green",guide = guide_legend(title = "Velocity"))+ ggtitle("2017-2018")
+dif <- ma2#
+ddd=as.data.frame(dif,xy=TRUE)#
+ddd=ddd[complete.cases(ddd),]
+ggmap(map)+ geom_point(data = ddd, aes(x = x, y = y, color = layer), alpha = 0.3)+#
+  scale_colour_gradient( low="red", high="green",guide = guide_legend(title = "Velocity"))+ ggtitle("2017-2018")
+dif <- ma#
+ddd=as.data.frame(dif,xy=TRUE)#
+ddd=ddd[complete.cases(ddd),]
+ggmap(map)+ geom_point(data = ddd, aes(x = x, y = y, color = layer), alpha = 0.3)+#
+  scale_colour_gradient( low="red", high="green",guide = guide_legend(title = "Velocity"))+ ggtitle("2013-2015")
+rs = dbSendQuery(mydb, "SELECT locations_prod.velocity as vel, YEAR(FROM_UNIXTIME(locations_prod.timestamp+946684800)) as yeart, locations_prod.latitude/ 1e7 as latitude, locations_prod.longitude/ 1e7 as longitude, activity, HOUR(FROM_UNIXTIME(locations_prod.timestamp+946684800)) as hourt #
+FROM locations_prod#
+WHERE locations_prod.velocity IS NOT NULL && locations_prod.velocity > 0 && locations_prod.activity IS NOT NULL && locations_prod.activity = 'ONB' && YEAR(FROM_UNIXTIME(locations_prod.timestamp+946684800)) <= 2015")#
+#
+data = fetch(rs, n=35000)#
+dbClearResult(rs)#
+data <- filter(data, hourt >= 7)#
+data <- filter(data, hourt <= 18)#
+#
+data$qq=as.integer(cut(data$vel,quantile(data$vel)))#
+#
+coordinates(data)=with(data,cbind(longitude,latitude))#
+ma <- raster(ncol = 250, nrow = 250)#
+extent(ma) <- extent(pts)#
+ma <- rasterize(data, ma, data$qq, fun = mean)#
+plot(ma)
+mydb = dbConnect(MySQL(), #
+                 user='administrador', #
+                 password='anal_geografico_2018', #
+                 dbname='db_location_uploads', #
+                 host='location-uploads.coxl8wirabtc.us-west-1.rds.amazonaws.com')#
+#
+dbListTables(mydb)
+rs = dbSendQuery(mydb, "SELECT locations_prod.velocity as vel, YEAR(FROM_UNIXTIME(locations_prod.timestamp+946684800)) as yeart, locations_prod.latitude/ 1e7 as latitude, locations_prod.longitude/ 1e7 as longitude, activity, HOUR(FROM_UNIXTIME(locations_prod.timestamp+946684800)) as hourt #
+FROM locations_prod#
+WHERE locations_prod.velocity IS NOT NULL && locations_prod.velocity > 0 && locations_prod.activity IS NOT NULL && locations_prod.activity = 'ONB' && YEAR(FROM_UNIXTIME(locations_prod.timestamp+946684800)) <= 2015")#
+#
+data = fetch(rs, n=35000)#
+dbClearResult(rs)#
+data <- filter(data, hourt >= 7)#
+data <- filter(data, hourt <= 18)#
+#
+data$qq=as.integer(cut(data$vel,quantile(data$vel)))#
+#
+coordinates(data)=with(data,cbind(longitude,latitude))#
+ma <- raster(ncol = 250, nrow = 250)#
+extent(ma) <- extent(pts)#
+ma <- rasterize(data, ma, data$qq, fun = mean)#
+plot(ma)
+rtp <- rasterToPolygons(ma)#
+rtp@data$id <- 1:nrow(rtp@data)   # add id column for join#
+#
+rtpFort <- fortify(rtp, data = rtp@data)#
+rtpFortMer <- merge(rtpFort, rtp@data, by.x = 'id', by.y = 'id')  # join data#
+#
+bm <- ggmap(get_map(location = "chapinero, bogota, colombia", maptype = "hybrid", zoom = 12))#
+#
+bm + geom_polygon(data = rtpFortMer, #
+                  aes(x = long, y = lat, group = group, fill = layer), #
+                  alpha = 0.5, #
+                  size = 0) +  ## size = 0 to remove the polygon outlines#
+     scale_fill_gradientn(colours = topo.colors(255))
+map <- get_map("Bogota", zoom = 12, source = 'stamen', maptype = "toner")
+library(ggmap)
+library(ggplot2)
+map <- get_map("Bogota", zoom = 12, source = 'stamen', maptype = "toner")
+dif <- log(ma)#
+ddd=as.data.frame(dif,xy=TRUE)#
+ddd=ddd[complete.cases(ddd),]
+ggmap(map)+ geom_point(data = ddd, aes(x = x, y = y, color = layer), alpha = 0.3)+#
+  scale_colour_gradient( low="red", high="green",guide = guide_legend(title = "Velocity"))
+rs = dbSendQuery(mydb, "SELECT locations_prod.velocity as vel, YEAR(FROM_UNIXTIME(locations_prod.timestamp+946684800)) as yeart, locations_prod.latitude/ 1e7 as latitude, locations_prod.longitude/ 1e7 as longitude, activity, HOUR(FROM_UNIXTIME(locations_prod.timestamp+946684800)) as hourt #
+FROM locations_prod#
+WHERE locations_prod.velocity IS NOT NULL && locations_prod.velocity > 0 && locations_prod.activity IS NOT NULL && locations_prod.activity = 'INV' && YEAR(FROM_UNIXTIME(locations_prod.timestamp+946684800)) <= 2015")#
+#
+data = fetch(rs, n=35000)#
+dbClearResult(rs)#
+data <- filter(data, hourt >= 7)#
+data <- filter(data, hourt <= 18)#
+#
+data$qq=as.integer(cut(data$vel,quantile(data$vel)))
+mydb = dbConnect(MySQL(), #
+                 user='administrador', #
+                 password='anal_geografico_2018', #
+                 dbname='db_location_uploads', #
+                 host='location-uploads.coxl8wirabtc.us-west-1.rds.amazonaws.com')#
+#
+dbListTables(mydb)
+rs = dbSendQuery(mydb, "SELECT locations_prod.velocity as vel, YEAR(FROM_UNIXTIME(locations_prod.timestamp+946684800)) as yeart, locations_prod.latitude/ 1e7 as latitude, locations_prod.longitude/ 1e7 as longitude, activity, HOUR(FROM_UNIXTIME(locations_prod.timestamp+946684800)) as hourt #
+FROM locations_prod#
+WHERE locations_prod.velocity IS NOT NULL && locations_prod.velocity > 0 && locations_prod.activity IS NOT NULL && locations_prod.activity = 'INV' && YEAR(FROM_UNIXTIME(locations_prod.timestamp+946684800)) <= 2015")#
+#
+data = fetch(rs, n=35000)#
+dbClearResult(rs)#
+data <- filter(data, hourt >= 7)#
+data <- filter(data, hourt <= 18)#
+#
+data$qq=as.integer(cut(data$vel,quantile(data$vel)))
+ddd=data#
+ddd=as.data.frame(dif,xy=TRUE)#
+ddd=ddd[complete.cases(ddd),]
+map <- get_map("Bogota", zoom = 12, source = 'stamen', maptype = "toner")
+library(ggmap)
+saveRDS(data,"datamov.rds")
+library(raster)#
+library(dplyr)#
+library(mapview)#
+library(mapedit)#
+library(sf)#
+library(readr)#
+library(ggplot2)
+install.packages("sf")
+install.packages('udunits2', type = 'source', repo = 'cran.rstudio.com')
+install.packages('udunits2')
+install.packages("sf")
+library(raster)#
+library(dplyr)#
+library(mapview)#
+library(mapedit)#
+library(sf)#
+library(readr)#
+library(ggplot2)
+install.packages("mapview")
+install.packages("sf")
+install.packages("mapview")
+library(ggmap)
+register_google()
+?register_google
+str_name<-'~/Dropbox/EstructuraEcologicaPrincipal/data/Bogota-NDVI-RVDH.tif' #
+ndvi<-raster(str_name)#
+a1<-aggregate(ndvi,fact=10,fun=mean)#
+a2<-aggregate(a1,fact=10,fun=mean)#
+dbs <- as.data.frame(a1, xy = TRUE)#
+names(dbs) <- c("x","y","NDVI")#
+dbsbak=dbs#
+#dbs=dbsbak#
+dbs=dbs[complete.cases(dbs),]#
+#dbs=subset(dbs,NDVI > mean(dbs$NDVI)+sd(dbs$NDVI))#
+dbs=subset(dbs,NDVI > mean(dbs$NDVI))#
+dbs=dbs[round(runif(2300,0,dim(dbs)[1])),]#
+#
+m1 <-mapper1D(distance_matrix = dist(data.frame(x = dbs$x, y =#
+dbs$y)), filter_values = as.numeric(dbs$NDVI), num_intervals = 50,#
+percent_overlap = 50, num_bins_when_clustering = 27)#
+g1 <- graph.adjacency(m1$adjacency, mode="undirected")#
+plot(g1, layout = layout.auto(g1) )#
+##m1 <-mapper1D(distance_matrix = dist(data.frame(x = rrr$tiempo_radio, y =#
+#rrr$tiempo_tv)), filter_values = rrr$tiempo_prensa, num_intervals = 10,#
+#percent_overlap = 80, num_bins_when_clustering = 15)#
+#
+color <- 0#
+for (i in m1$points_in_vertex){#
+    ind <- unlist(i)#
+    color <- c(color,mean(dbs[ind,"NDVI"],na.rm=TRUE))#
+}#
+#
+color <- color[-1]#
+#
+g1 <- graph.adjacency(m1$adjacency, mode="undirected")#
+plot(g1, layout = layout.auto(g1),vertex.color=color )#
+param <- function(db,xlist,string){#
+    temp <- 0#
+    for (i in xlist){#
+        ind <- unlist(i)#
+        temp <- c(temp,mean(db[ind,string],na.rm=TRUE))#
+    }#
+    return(temp[-1])#
+}#
+#
+parasum <- function(db,xlist,string){#
+    temp <- 0#
+    for (i in xlist){#
+        ind <- unlist(i)#
+        temp <- c(temp,sum(db[ind,string],na.rm=TRUE))#
+    }#
+    return(temp[-1])#
+}#
+plot(g1, layout = layout.auto(g1),vertex.color=param(dbs,m1$points_in_vertex,"NDVI"),vertex.size=param(dbs,m1$points_in_vertex,"NDVI") )#
+#
+#color <- param(fbd,m1$points_in_vertex,"NVDI")#
+#
+plotvar <- log(color)#
+nclr <- 8#
+plotclr <- brewer.pal(nclr,"Greens")#
+class <- classIntervals(plotvar, nclr, style="jenks")#
+colcode <- findColours(class, plotclr)#
+#
+l <- cbind(param(dbs,m1$points_in_vertex,"x"),param(dbs,m1$points_in_vertex,"y"))#
+#pdf("Bogota-EEP-NDVI.pdf")#
+plot(a1)#
+plot(g1,vertex.color=colcode,vertex.size=log(as.numeric(lapply(m1$points_in_vertex,length)))/3,layout=l,main="NDVI Clusters in Bogotá",vertex.label="",rescale = FALSE,add=TRUE)#
+#legend("topright", legend=names(attr(colcode, "table")), #
+ #      fill=attr(colcode, "palette"), cex=0.6, bty="n")#
+#dev.off()#
+#
+#PARA HACER PLOT SOBRE MAPA                                        ##
+#https://rstudio-pubs-static.s3.amazonaws.com/298685_7ca83d01093a4ed79479197945d3783d.html#
+##
+#
+library(ggmap)#
+#
+map <- get_map(loc=c(lon=-74.1,lat=4.6), zoom=9,maptype = 'satellite')#
+p <- ggmap(map) #
+p#
+plot(g1,vertex.color=colcode,vertex.size=log(as.numeric(lapply(m1$points_in_vertex,length)))/3,layout=l,main="NDVI Clusters in Bogotá",vertex.label="",rescale = FALSE,add=TRUE)#
+##tomado de https://blogs.oii.ox.ac.uk/bright/2015/12/07/getting-ggplot2-to-work-with-igraph/#
+#
+nodesize <- log(as.numeric(lapply(m1$points_in_vertex,length)))/3#
+#
+plotcord <- data.frame(l,colcode,nodesize)#
+ colnames(plotcord) = c("X1","X2","colcode","nsize")#
+ edgelist <- get.edgelist(g1)#
+ edges <- data.frame(plotcord[edgelist[,1],], plotcord[edgelist[,2],])#
+ colnames(edges) <- c("X1","Y1","colcode","nsize","X2","Y2","colcode2","nsize2")#
+ p + geom_segment(aes(x=X1, y=Y1, xend = X2, yend = Y2), data=edges, size = 0.5, colour="grey") + geom_point(aes(X1, X2),colour=colcode,size=plotcord$nsize, data=plotcord)#
+#shp <- readShapePoly("~/Dropbox/movilidad/GIS/sectores-wgs84.shp")#
+#shp <- readShapePoly("~/Dropbox/feminicidios/GIS/manzanas-DANE/DANE/Sectores.shp")#
+#shp <- st_read("~/Dropbox/feminicidios/GIS/manzanas-DANE/DANE/Sectores.shp")#
+#bog <- spTransform(shp, crs(a1))
+install.packages(c("Deducer","sp","rgdal","maptools"))#
+install.packages("UScensus2000")#
+#
+#get development versions#
+install.packages(c("JGR","Deducer"),,"http://rforge.net",type="source")#
+install.packages("DeducerSpatial",,"http://r-forge.r-project.org",type="source")
+library(DeducerSpatial)#
+library(UScensus2000)#
+#
+#create an open street map image#
+lat <- c(43.834526782236814,30.334953881988564)#
+lon <- c(-131.0888671875  ,-107.8857421875)#
+southwest <- openmap(c(lat[1],lon[1]),c(lat[2],lon[2]),zoom=5,'osm')#
+plot(southwest,raster=FALSE)
+library(OpenStreetMap)#
+library(rgdal)#
+map <- openmap(c(70,-179), c(-70,179))#
+plot(map)
+install.packages(OpenStreetMap)
+install.packages("OpenStreetMap")
+library(OpenStreetMap)#
+library(rgdal)#
+map <- openmap(c(70,-179), c(-70,179))#
+plot(map)
+library(ggmap)#
+#
+map <- get_map(loc=c(lon=-74.1,lat=4.6), zoom=9,maptype = 'satellite')#
+p <- ggmap(map) #
+p
+key <- "AIzaSyBHGjdYg43bLzl9GjBifbZA1StuPq4hDbY"
+register_google(key = key)
+runif(100,0,5)
+mean(runif(100,0,5))
+hist(runif(100,0,5))
+mean(runif(100,0,5))
+c=mean(runif(100,0,5))
+for(i in 1:100){
+c=c(c,mean(runif(100,0,5)))
+}
+hist(c)
+for(i in 1:100){c=c(c,mean(runif(100,0,5)))}
+hist(c)
+for(i in 1:100){c=c(c,mean(runif(100,0,5)))}
+hist(c)
+for(i in 1:1000){c=c(c,mean(runif(100,0,5)))}
+hist(c)
+for(i in 1:1000){c=c(c,mean(runif(100,0,5)))}
+hist(c)
+mean(c)
+for(i in 1:1000){c=c(c,mean(runif(1000,0,1000)))}
+for(i in 1:10000){c=c(c,mean(runif(1000,0,1000)))}
+hist(c)
+c=500
+for(i in 1:10000){c=c(c,mean(runif(1000,0,1000)))}
+c=500
+for(i in 1:10000){c=c(c,mean(runif(1000,0,1000)))}
+hist(c)
+install.packages("Pophelper")
+install.packages("Pophelper", source = TRUE)
+install.packages(c("Cairo","ggplot2","gridExtra","gtable","tidyr","devtools"),dependencies=T)#
+#
+# install pophelper package from GitHub#
+devtools::install_github('royfrancis/pophelper')#
+#
+# load library for use#
+library(pophelper)
+install.packages("ggplot2", dependencies = TRUE)
+library(pophelper)
+remove.packages(c("ggplot2", "data.table"))#
+install.packages('Rcpp', dependencies = TRUE)#
+install.packages('ggplot2', dependencies = TRUE)#
+install.packages('data.table', dependencies = TRUE)
+library(pophelper)
+devtools::install_github("r-lib/rlang", build_vignettes = TRUE)
+library(pophelper)
+remove.packages(c("ggplot2", "data.table"))#
+install.packages('Rcpp', dependencies = TRUE)#
+install.packages('ggplot2', dependencies = TRUE)#
+install.packages('data.table', dependencies = TRUE)
+library(pophelper)
+install.packages("rlang")
+update.packages("rlang")
+library(pophelper)
+install.packages(c("Cairo","ggplot2","gridExtra","gtable","tidyr","devtools"),dependencies=T)#
+#
+# install pophelper package from GitHub#
+devtools::install_github('royfrancis/pophelper')#
+#
+# load library for use#
+library(pophelper)
+devtools::install_github("r-lib/rlang", build_vignettes = TRUE)
+library(pophelper)
+library(ggplot2)
+remove.packages("rlang")#
+install.packages("rlang")
+library(pophelper)
+remove.packages("rlang")#
+install.packages("rlang",version=0.3.1)
+remove.packages("rlang")#
+install.packages("rlang",version="0.3.1")
+library(pophelper)
+library(WaveletComp)#
+setwd("~/Dropbox/Malaria_Guapi_EquipoCol/Sivigila/")#
+#
+x=read.csv("sivigila-guapi.csv")#
+#x=read.csv("sivigila_pacifico.csv")#
+x=x[with(x, order(x$YRWK)),]#
+#
+#x=x[-1]#
+#
+my.data=x#
+#
+afro <- subset(x,Ethnic.group == "5 - NEGRO, MULATO, AFROCOLOMBIANO O AFRODESCENCIENTE")#
+#
+fff=ddply(afro,.(Year,week),function(x){sum(x$Total)})#
+fff$YRWK= as.numeric(as.character(fff$Year)) + (as.numeric(fff$Week)/53)#
+#
+other <- subset(x,Ethnic.group == "6 - OTRAS ETNIAS")#
+#
+my.data <- data.frame(x = afro$V1)#
+my.w <- analyze.wavelet(my.data, "x",#
+loess.span = 0,#
+dt = 1, dj = 1/250,#
+lowerPeriod = 16,#
+upperPeriod = 128,#
+make.pval = TRUE, n.sim = 10)#
+wt.image(my.w, n.levels = 250,#
+legend.params = list(lab = "wavelet power levels"))#
+my.w <- analyze.wavelet(my.data, "x",#
+loess.span = 0,#
+dt = 1, dj = 1/250,#
+lowerPeriod = 16,#
+upperPeriod = 128,#
+make.pval = TRUE, n.sim = 10)#
+wt.image(my.w, n.levels = 250,#
+legend.params = list(lab = "wavelet power levels"))#
+my.data <- data.frame(x = afro$Total, y = other$Total)#
+my.wx <- analyze.wavelet(my.data, "Tot", loess.span = 0,#
+dt = 1, dj = 1/20,#
+lowerPeriod = 16, upperPeriod = 256,#
+make.pval = TRUE, n.sim = 10)#
+my.wy <- analyze.wavelet(my.data, "Number.of.Records", loess.span = 0,#
+dt = 1, dj = 1/20,#
+lowerPeriod = 16, upperPeriod = 256,#
+make.pval = TRUE, n.sim = 10)#
+maximum.level = 1.001*max(my.wx$Power.avg, my.wy$Power.avg)#
+wt.avg(my.wx, maximum.level = maximum.level)#
+wt.avg(my.wy, maximum.level = maximum.level)
+library(plyr)
+library(WaveletComp)#
+setwd("~/Dropbox/Malaria_Guapi_EquipoCol/Sivigila/")#
+#
+x=read.csv("sivigila-guapi.csv")#
+#x=read.csv("sivigila_pacifico.csv")#
+x=x[with(x, order(x$YRWK)),]#
+#
+#x=x[-1]#
+#
+my.data=x#
+#
+afro <- subset(x,Ethnic.group == "5 - NEGRO, MULATO, AFROCOLOMBIANO O AFRODESCENCIENTE")#
+#
+fff=ddply(afro,.(Year,week),function(x){sum(x$Total)})#
+fff$YRWK= as.numeric(as.character(fff$Year)) + (as.numeric(fff$Week)/53)#
+#
+other <- subset(x,Ethnic.group == "6 - OTRAS ETNIAS")#
+#
+my.data <- data.frame(x = afro$V1)#
+my.w <- analyze.wavelet(my.data, "x",#
+loess.span = 0,#
+dt = 1, dj = 1/250,#
+lowerPeriod = 16,#
+upperPeriod = 128,#
+make.pval = TRUE, n.sim = 10)#
+wt.image(my.w, n.levels = 250,#
+legend.params = list(lab = "wavelet power levels"))#
+my.w <- analyze.wavelet(my.data, "x",#
+loess.span = 0,#
+dt = 1, dj = 1/250,#
+lowerPeriod = 16,#
+upperPeriod = 128,#
+make.pval = TRUE, n.sim = 10)#
+wt.image(my.w, n.levels = 250,#
+legend.params = list(lab = "wavelet power levels"))#
+my.data <- data.frame(x = afro$Total, y = other$Total)#
+my.wx <- analyze.wavelet(my.data, "Tot", loess.span = 0,#
+dt = 1, dj = 1/20,#
+lowerPeriod = 16, upperPeriod = 256,#
+make.pval = TRUE, n.sim = 10)#
+my.wy <- analyze.wavelet(my.data, "Number.of.Records", loess.span = 0,#
+dt = 1, dj = 1/20,#
+lowerPeriod = 16, upperPeriod = 256,#
+make.pval = TRUE, n.sim = 10)#
+maximum.level = 1.001*max(my.wx$Power.avg, my.wy$Power.avg)#
+wt.avg(my.wx, maximum.level = maximum.level)#
+wt.avg(my.wy, maximum.level = maximum.level)
+head(x)
+fff=ddply(afro,.(Year,Week),function(x){sum(x$Total)})#
+fff$YRWK= as.numeric(as.character(fff$Year)) + (as.numeric(fff$Week)/53)#
+#
+other <- subset(x,Ethnic.group == "6 - OTRAS ETNIAS")#
+#
+my.data <- data.frame(x = afro$V1)#
+my.w <- analyze.wavelet(my.data, "x",#
+loess.span = 0,#
+dt = 1, dj = 1/250,#
+lowerPeriod = 16,#
+upperPeriod = 128,#
+make.pval = TRUE, n.sim = 10)#
+wt.image(my.w, n.levels = 250,#
+legend.params = list(lab = "wavelet power levels"))
+afro <- subset(x,Ethnic.group == "5 - NEGRO, MULATO, AFROCOLOMBIANO O AFRODESCENCIENTE")
+head(afro)
+fff=ddply(afro,.(Year,Week),function(x){sum(x$Total)})
+head(fff)
+fff$YRWK= as.numeric(as.character(fff$Year)) + (as.numeric(fff$Week)/53)
+other <- subset(x,Ethnic.group == "6 - OTRAS ETNIAS")
+my.data <- data.frame(x = afro$V1)#
+my.w <- analyze.wavelet(my.data, "x",#
+loess.span = 0,#
+dt = 1, dj = 1/250,#
+lowerPeriod = 16,#
+upperPeriod = 128,#
+make.pval = TRUE, n.sim = 10)#
+wt.image(my.w, n.levels = 250,#
+legend.params = list(lab = "wavelet power levels"))
+my.data <- data.frame(x = afro$Total, y = other$Total)#
+my.wx <- analyze.wavelet(my.data, "Tot", loess.span = 0,#
+dt = 1, dj = 1/20,#
+lowerPeriod = 16, upperPeriod = 256,#
+make.pval = TRUE, n.sim = 10)#
+my.wy <- analyze.wavelet(my.data, "Number.of.Records", loess.span = 0,#
+dt = 1, dj = 1/20,#
+lowerPeriod = 16, upperPeriod = 256,#
+make.pval = TRUE, n.sim = 10)
+x=read.csv("sivigila-guapi.csv")#
+#x=read.csv("sivigila_pacifico.csv")#
+x=x[with(x, order(x$YRWK)),]
+x=x[-1]
+my.data=x
+my.w <- analyze.wavelet(my.data, "x",#
+loess.span = 0,#
+dt = 1, dj = 1/250,#
+lowerPeriod = 16,#
+upperPeriod = 128,#
+make.pval = TRUE, n.sim = 10)#
+wt.image(my.w, n.levels = 250,#
+legend.params = list(lab = "wavelet power levels"))
+fff=ddply(x,.(Year,Week),function(x){sum(x$Total)})#
+fff$YRWK= as.numeric(as.character(fff$Year)) + (as.numeric(fff$Week)/53)
+head(x)
+x=read.csv("sivigila-guapi.csv")#
+#x=read.csv("sivigila_pacifico.csv")#
+x=x[with(x, order(x$YRWK)),]#
+#
+x=x[-1,]
+fff=ddply(x,.(Year,Week),function(x){sum(x$Total)})#
+fff$YRWK= as.numeric(as.character(fff$Year)) + (as.numeric(fff$Week)/53)
+head(fff)
+my.data <- data.frame(x = fff$V1)#
+my.w <- analyze.wavelet(my.data, "x",#
+loess.span = 0,#
+dt = 1, dj = 1/250,#
+lowerPeriod = 16,#
+upperPeriod = 128,#
+make.pval = TRUE, n.sim = 10)#
+wt.image(my.w, n.levels = 250,#
+legend.params = list(lab = "wavelet power levels"))
+x=read.csv("sivigila_pacifico.csv")#
+x=x[with(x, order(x$YRWK)),]#
+#
+x=x[-1,]#
+#
+my.data=x#
+#
+#afro <- subset(x,Ethnic.group == "5 - NEGRO, MULATO, AFROCOLOMBIANO O AFRODESCENCIENTE")#
+#
+fff=ddply(x,.(Year,Week),function(x){sum(x$Total)})#
+fff$YRWK= as.numeric(as.character(fff$Year)) + (as.numeric(fff$Week)/53)
+head(x)
+x=read.csv("sivigila_pacifico.csv")#
+x=x[with(x, order(x$YRWK)),]#
+#
+x=x[-1,]#
+#
+my.data=x#
+#
+#afro <- subset(x,Ethnic.group == "5 - NEGRO, MULATO, AFROCOLOMBIANO O AFRODESCENCIENTE")#
+#
+fff=ddply(x,.(YRWK),function(x){sum(x$Total)})#
+#fff$YRWK= as.numeric(as.character(fff$Year)) + (as.numeric(fff$Week)/53)
+head(fff)
+my.data <- data.frame(x = fff$V1)#
+my.w <- analyze.wavelet(my.data, "x",#
+loess.span = 0,#
+dt = 1, dj = 1/250,#
+lowerPeriod = 16,#
+upperPeriod = 128,#
+make.pval = TRUE, n.sim = 10)#
+wt.image(my.w, n.levels = 250,#
+legend.params = list(lab = "wavelet power levels"))
+my.w <- analyze.wavelet(my.data, "x",#
+loess.span = 0,#
+dt = 1, dj = 1/250,#
+lowerPeriod = 16,#
+upperPeriod = 128,#
+make.pval = TRUE, n.sim = 10)#
+wt.image(my.w, n.levels = 250,#
+legend.params = list(lab = "wavelet power levels"))
+y=read.csv("sivigila_pacifico.csv")#
+x=x[with(x, order(x$YRWK)),]#
+y=y[with(y, order(y$YRWK)),]#
+#
+x=x[-1,]#
+y=y[-1,]#
+#
+my.data=x#
+my.datay=y#
+#afro <- subset(x,Ethnic.group == "5 - NEGRO, MULATO, AFROCOLOMBIANO O AFRODESCENCIENTE")#
+#
+fff=ddply(x,.(Year,Week),function(x){sum(x$Total)})#
+fff$YRWK= as.numeric(as.character(fff$Year)) + (as.numeric(fff$Week)/53)#
+#
+ggg <- ddply(y,.(YRWk),function(x){sum(x$Total)})
+x=read.csv("sivigila-guapi.csv")#
+y=read.csv("sivigila_pacifico.csv")#
+x=x[with(x, order(x$YRWK)),]#
+y=y[with(y, order(y$YRWK)),]#
+#
+x=x[-1,]#
+y=y[-1,]#
+#
+my.data=x#
+my.datay=y#
+#afro <- subset(x,Ethnic.group == "5 - NEGRO, MULATO, AFROCOLOMBIANO O AFRODESCENCIENTE")#
+#
+fff=ddply(x,.(Year,Week),function(x){sum(x$Total)})#
+fff$YRWK= as.numeric(as.character(fff$Year)) + (as.numeric(fff$Week)/53)#
+#
+ggg <- ddply(y,.(YRWk),function(x){sum(x$Total)})
+head(x)
+fff=ddply(x,.(Year,Week),function(x){sum(x$Total)})
+ggg <- ddply(y,.(YRWK),function(x){sum(x$Total)})
+my.data <- data.frame(x = fff$V1)#
+my.w <- analyze.wavelet(my.data, "x",#
+loess.span = 0,#
+dt = 1, dj = 1/250,#
+lowerPeriod = 16,#
+upperPeriod = 128,#
+make.pval = TRUE, n.sim = 10)#
+wt.image(my.w, n.levels = 250,#
+legend.params = list(lab = "wavelet power levels"))
+my.data <- data.frame(x = fff$Total, y = ggg$Total)#
+my.wx <- analyze.wavelet(my.data, "Tot", loess.span = 0,#
+dt = 1, dj = 1/20,#
+lowerPeriod = 16, upperPeriod = 256,#
+make.pval = TRUE, n.sim = 10)#
+my.wy <- analyze.wavelet(my.data, "Number.of.Records", loess.span = 0,#
+dt = 1, dj = 1/20,#
+lowerPeriod = 16, upperPeriod = 256,#
+make.pval = TRUE, n.sim = 10)
+head(fff)
+head(ggg)
+fff$YRWK= as.numeric(as.character(fff$Year)) + (as.numeric(fff$Week)/53)
+mmm=merge(fff,ggg,by="YRWK")
+head(mmm)
+my.data <- data.frame(x = mmm$V1.x, y = mmm$V1.y)#
+my.wx <- analyze.wavelet(my.data, "Tot", loess.span = 0,#
+dt = 1, dj = 1/20,#
+lowerPeriod = 16, upperPeriod = 256,#
+make.pval = TRUE, n.sim = 10)#
+my.wy <- analyze.wavelet(my.data, "Number.of.Records", loess.span = 0,#
+dt = 1, dj = 1/20,#
+lowerPeriod = 16, upperPeriod = 256,#
+make.pval = TRUE, n.sim = 10)
+dim(mmm)
+namesggg
+names(ggg)
+names(fff)
+head(fff)
+head(ggg)
+mmm=merge(fff,ggg,by="YRWK")
+head(mmm)
+class(fff$YRWK)
+class(ggg$YRWK)
+dim(fff)
+dim(ggg)
+head(y)
+ggg <- ddply(y,.(Year, week),function(x){sum(x$Total)})
+head(ggg)
+head(fff)
+ggg$YRWK= as.numeric(as.character(ggg$Year)) + (as.numeric(ggg$Week)/53)
+head(ggg)
+ggg$YRWK= as.numeric(as.numeric(ggg$Year)) + (as.numeric(ggg$Week)/53)
+ggg$YRWK= as.numeric(as.numeric(ggg$Year)) + (as.numeric(ggg$week)/53)
+ggg$ID <- paste(ggg$Year,ggg$week,sep="-")
+head(ggg)
+fff$ID <- paste(fff$Year,fff$Week,sep="-")
+mmm=merge(fff,ggg,by="ID")
+head(mmm)
+my.data <- data.frame(x = mmm$V1.x, y = mmm$V1.y)#
+my.wx <- analyze.wavelet(my.data, "Tot", loess.span = 0,#
+dt = 1, dj = 1/20,#
+lowerPeriod = 16, upperPeriod = 256,#
+make.pval = TRUE, n.sim = 10)#
+my.wy <- analyze.wavelet(my.data, "Number.of.Records", loess.span = 0,#
+dt = 1, dj = 1/20,#
+lowerPeriod = 16, upperPeriod = 256,#
+make.pval = TRUE, n.sim = 10)
+mmm
+my.data <- data.frame(x = mmm$V1.x, y = mmm$V1.y)#
+my.wc <- analyze.coherency(my.data, my.pair = c("x","y"),#
+loess.span = 0,#
+dt = 1/54, dj = 1/10,#
+lowerPeriod = 1/2,#
+make.pval = TRUE, n.sim = 10)#
+#
+wt.image(my.wc, my.series = "x")#
+wt.image(my.wc, my.series = "y")
+my.data <- data.frame(x = mmm$V1.x, y = mmm$V1.y)#
+my.wc <- analyze.coherency(my.data, my.pair = c("x","y"),#
+loess.span = 0,#
+dt = 1, dj = 1/10,#
+lowerPeriod = 1/2,#
+make.pval = TRUE, n.sim = 10)#
+#
+wt.image(my.wc, my.series = "x")#
+wt.image(my.wc, my.series = "y")
+my.data <- data.frame(x = mmm$V1.x, y = mmm$V1.y)#
+my.wx <- analyze.wavelet(my.data, "Tot", loess.span = 0,#
+dt = 1, dj = 1/20,#
+lowerPeriod = 1, upperPeriod = 256,#
+make.pval = TRUE, n.sim = 10)#
+my.wy <- analyze.wavelet(my.data, "Number.of.Records", loess.span = 0,#
+dt = 1, dj = 1/20,#
+lowerPeriod = 16, upperPeriod = 256,#
+make.pval = TRUE, n.sim = 10)
+head(my.data)
+my.wx <- analyze.wavelet(my.data, "y", loess.span = 0,#
+dt = 1, dj = 1/20,#
+lowerPeriod = 1, upperPeriod = 256,#
+make.pval = TRUE, n.sim = 10)#
+my.wy <- analyze.wavelet(my.data, "y", loess.span = 0,#
+dt = 1, dj = 1/20,#
+lowerPeriod = 16, upperPeriod = 256,#
+make.pval = TRUE, n.sim = 10)
+wc.image(my.wc, n.levels = 250,legend.params = list(lab = "cross-wavelet power levels"),timelab = "", periodlab = "period (days)")
+wc.image(my.wc, n.levels = 50,legend.params = list(lab = "cross-wavelet power levels"),timelab = "", periodlab = "period (days)")
+wc.image(my.wc, n.levels = 2050,legend.params = list(lab = "cross-wavelet power levels"),timelab = "", periodlab = "period (days)")
+wc.image(my.wc,legend.params = list(lab = "cross-wavelet power levels"),timelab = "", periodlab = "period (days)")
+wc.image(my.wc,legend.params = list(lab = "cross-wavelet power levels"),timelab = "", periodlab = "period (days)")
+wt.avg(my.wx, maximum.level = maximum.level)#
+wt.avg(my.wy, maximum.level = maximum.level)
+maximum.level = 1.001*max(my.wx$Power.avg, my.wy$Power.avg)#
+wt.avg(my.wx, maximum.level = maximum.level)#
+wt.avg(my.wy, maximum.level = maximum.level)
+my.wx <- analyze.wavelet(my.data, "y", loess.span = 0,#
+dt = 1, dj = 1/20,#
+lowerPeriod = 1, upperPeriod = 256,#
+make.pval = TRUE, n.sim = 10)
+wt.image(my.w, n.levels = 250,#
+legend.params = list(lab = "wavelet power levels"))
+wt.image(my.wx, n.levels = 250,#
+legend.params = list(lab = "wavelet power levels"))
+wt.image(my.wx, n.levels = 250,#
+legend.params = list(lab = "wavelet power levels"))
+wt.image(my.wx, n.levels = 250,#
+         legend.params = list(lab = "wavelet power levels"))#
+#
+wt.image(my.wy, n.levels = 250,#
+legend.params = list(lab = "wavelet power levels"))
+my.data <- data.frame(x = mmm$V1.x, y = mmm$V1.y)#
+my.wx <- analyze.wavelet(my.data, "Tot", loess.span = 0,#
+dt = 1, dj = 1/20,#
+lowerPeriod = 1, upperPeriod = 256,#
+make.pval = TRUE, n.sim = 10)#
+my.wy <- analyze.wavelet(my.data, "Number.of.Records", loess.span = 0,#
+dt = 1, dj = 1/20,#
+lowerPeriod = 16, upperPeriod = 256,#
+make.pval = TRUE, n.sim = 10)
+my.data <- data.frame(x = mmm$V1.x, y = mmm$V1.y)#
+my.wx <- analyze.wavelet(my.data, "x", loess.span = 0,#
+dt = 1, dj = 1/20,#
+lowerPeriod = 1, upperPeriod = 256,#
+make.pval = TRUE, n.sim = 10)#
+my.wy <- analyze.wavelet(my.data, "y", loess.span = 0,#
+dt = 1, dj = 1/20,#
+lowerPeriod = 16, upperPeriod = 256,#
+make.pval = TRUE, n.sim = 10)
+wt.image(my.wx, n.levels = 250,#
+         legend.params = list(lab = "wavelet power levels"))#
+#
+wt.image(my.wy, n.levels = 250,#
+legend.params = list(lab = "wavelet power levels"))
+my.data <- data.frame(x = mmm$V1.x, y = mmm$V1.y)#
+my.wx <- analyze.wavelet(my.data, "x", loess.span = 0,#
+dt = 1, dj = 1/20,#
+lowerPeriod = 1, upperPeriod = 256,#
+make.pval = TRUE, n.sim = 10)#
+my.wy <- analyze.wavelet(my.data, "y", loess.span = 0,#
+dt = 1, dj = 1/20,#
+lowerPeriod = 1, upperPeriod = 256,#
+make.pval = TRUE, n.sim = 10)
+wt.image(my.wx, n.levels = 250,#
+         legend.params = list(lab = "wavelet power levels"))#
+#
+wt.image(my.wy, n.levels = 250,#
+legend.params = list(lab = "wavelet power levels"))
+maximum.level = 1.001*max(my.wx$Power.avg, my.wy$Power.avg)#
+wt.avg(my.wx, maximum.level = maximum.level)#
+wt.avg(my.wy, maximum.level = maximum.level)
+my.wc <- analyze.coherency(my.data, my.pair = c("x","y"),loess.span = 0,dt = 1/24, dj = 1/100,lowerPeriod = 1/2,make.pval = TRUE, n.sim = 10)
+wc.image(my.wc, n.levels = 250,legend.params = list(lab = "cross-wavelet power levels"),timelab = "", periodlab = "period (days)")
+my.wc <- analyze.coherency(my.data, my.pair = c("x","y"),loess.span = 0,dt = 1, dj = 1/100,lowerPeriod = 1/2,make.pval = TRUE, n.sim = 10)#
+#
+wc.image(my.wc, n.levels = 250,legend.params = list(lab = "cross-wavelet power levels"),timelab = "", periodlab = "period (weeks)")
+pdf("wavelets-guapi.pdf")#
+#
+wt.image(my.wx, n.levels = 250,#
+         legend.params = list(lab = "wavelet power levels"))#
+#
+wt.image(my.wy, n.levels = 250,#
+legend.params = list(lab = "wavelet power levels"))#
+maximum.level = 1.001*max(my.wx$Power.avg, my.wy$Power.avg)#
+wt.avg(my.wx, maximum.level = maximum.level)#
+wt.avg(my.wy, maximum.level = maximum.level)#
+my.wc <- analyze.coherency(my.data, my.pair = c("x","y"),loess.span = 0,dt = 1, dj = 1/100,lowerPeriod = 1/2,make.pval = TRUE, n.sim = 10)#
+#
+wc.image(my.wc, n.levels = 250,legend.params = list(lab = "cross-wavelet power levels"),timelab = "", periodlab = "period (days)")#
+dev.off()
+wc.avg(my.wc, siglvl = 0.01, sigcol = "red", sigpch = 20,periodlab = "period (days)")
+wt.image(my.wc, my.series = "x")wt.image(my.wc, my.series = "y")
+wt.image(my.wc, my.series = "x")
+#Set our working directory. #
+#This helps avoid confusion if our working directory is #
+#not our site because of other projects we were #
+#working on at the time. #
+setwd("~/Dropbox/github/currulao")#
+#
+#render your sweet site. #
+rmarkdown::render_site()
+128/53
+setwd("~/Dropbox/github/currulao")#
+#
+#render your sweet site. #
+rmarkdown::render_site()
+setwd("~/Dropbox/github/currulao")#
+#
+#render your sweet site. #
+rmarkdown::render_site()
+setwd("~/Dropbox/github/currulao")#
+#
+#render your sweet site. #
+rmarkdown::render_site()
+setwd("~/Dropbox/github/currulao")#
+#
+#render your sweet site. #
+rmarkdown::render_site()
+setwd("~/Dropbox/github/currulao")#
+#
+#render your sweet site. #
+rmarkdown::render_site()
+setwd("~/Dropbox/github/currulao")#
+#
+#render your sweet site. #
+rmarkdown::render_site()
