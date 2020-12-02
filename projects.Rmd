@@ -2,28 +2,22 @@
 title: "Proyectos"
 ---
 
-Me gusta explorar muchos temas diferentes. Actualmente colaboro con personas que admiro y son buenos amigos. 
+Mi investigación es multidisciplinar, me gusta trabajar en la intersección de diferentes campos teóricos y prácticos, como teoría evolutiva, ecología humana, ecología de paisaje, ecología del comportamiento, ecología de la enfermedad, detección remota, análisis de movilidad humana con datos de telefonía celular, redes sociales, unidades funcionales, megraregiones, crecimiento urbano, ecología urbana, elecciones, procesos democráticos, y evaluación profesoral. Estos temas están presentes en 3 líneas de investigación que exploro actualmente. En general, trabajo en grupos de investigación, no de manera aislada, pues el trabajo interdisciplinar requiere la articulación de varias perspectivas y cabezas (no podría yo solo trabajar en todos estos temas).
 
 # Redes sociales
 
-- Violencia digital, en conjunto con Quantil, participé en el primer estudio de violencia digital en Colombia (que nosotros sepamos). Fue un ejercicio muy interesante, combinando teoría de redes, inteligencia artificial, y preguntas de ciencias sociales.
-
-- Redes sociales en contextos electorales, en conjunto con varios colegas y estudiantes graduados, estudiamos procesos electorales en redes sociales. Básicamente nos preguntamos sobre la disrupción digital en la democracia, y reflexionamos sobre las encuestas, las redes sociales en el marco de otras disrupciones anteriores a procesos electorales, como por ejemplo, la radio. 
+Algo que empezó como un hobby, rápidamente se ha convertido en un tema de investigación central en mi trabajo. En redes sociales (Twitter), he estudiado  principalmente el surgimiento de esta herramienta como medio de comunicación y como mecanismo para generar consenso en una población, y la violencia digital como un fenómeno social. Cada vez estoy más convencido de que hace una falta enorme que las ciencias sociales le claven el diente a estos temas de datos digitales y de redes sociales, que están transformando la manera como vivimos, la democracia, ¡y muchos otros aspectos de fenómenos sociales súper interesantes!
+ 
 
 # Ecología de la enfermedad
 
-- Caracterización de la intensidad de la malaria en Colombia, implementando un algoritmo de detección de brotes (cociente de verosimilitud) y el análisis topológico de datos (TDA en inglés). 
-
-- Etnografía de un parásito, con métodos de etnografía cuantitativa hice un análisis de los perfiles de riesgo de contraer malaria en los Nükak de Aguabonita, en San José del Guaviare. 
-
-- Malaria Peri-urbana, con una combinación de métodos estadísticos y demográficos, hice un análisis de las transiciones epidémicas y demográficas que suceden en las áreas peri-urbanas en ciudades colombianas de menos de 50,000.
+Desde mi tesis doctoral incursioné en la investigación de la malaria en Colombia. En concreto,el trabajo que realizamos busca caracterizar la heterogeneidad del contagio en Colombia desde una perspectiva antropológica, y por qué en Colombia se dan las condiciones para el surgimiento de parásitos resistentes.
 
 # COVID-19
 
-- Como la mayoría de la gente que trabaja en algo de salud pública, la pandemia ha sido un gran reto para hacer aportes desde la perspectiva en la cual hago investigación. En conjunto con un grupo de colaboradores, hemos montado un grupo llamado Data Lama para trabajar combinando datos de movilidad, genómica, redes de contactos, y acupuntura urbana. Actualmente apoyamos varias entidades territoriales en Colombia y hemos prestado apoyo para proyectos en algunos países africanos. 
+Como la mayoría de la gente que trabaja en algo de salud pública, la pandemia ha sido un gran reto para hacer aportes desde la perspectiva en la cual hago investigación. En conjunto con un grupo de colaboradores, hemos montado un grupo llamado Data Lama para trabajar combinando datos de movilidad, genómica, redes de contactos, y acupuntura urbana. Actualmente apoyamos varias entidades territoriales en Colombia y hemos prestado apoyo para proyectos en algunos países africanos. 
 
 # Ecología Humana
 
-- Violencia y ecología en Bogotá, en conjunto con varios colegas de Biología, analizamos la relación que hay entre factores ecológicos y sociales en Bogotá, con particular interés a los homicidios y la estructura del arbolado urbano.
+En general, me gusta explorar la imprtancia del contexto ambiental para el bienestar humano. Esto lo hemos hecho desde diferentes ángulos en múltiples grupos e investigaciones, que incluyen preguntas sobre migración, crecimiento urbano, y vulnerabilidad.
 
-- Crecimiento urbano y migración en Colombia.
