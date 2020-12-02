@@ -13,6 +13,9 @@ navbar:
       href: projects.html  ##### stuff
     - text: "Blog"
       href: https://www.supercontra.blogspot.com
+    - text: "La Silla Vacía"
+      href: https://lasillavacia.com/users/supercontra
+      
     - text: "Clases"
       href: https://www.chuchoelpelicano.blogspot.com
        
