@@ -1,4 +1,6 @@
 
+cd ~/Dropbox/github/currulao
+
 git add -A 
 
 
