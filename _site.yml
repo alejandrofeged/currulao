@@ -15,10 +15,13 @@ navbar:
       href: https://supercontra.blogspot.com
     - text: "La Silla Vacía"
       href: https://lasillavacia.com/users/supercontra
-      
     - text: "Clases"
       href: https://chuchoelpelicano.blogspot.com
-       
+    - text: "Twitter"
+      href: https://twitter.com/supercontra
+    - text: "Data Lama-Covid-19"
+      href: https://datalama.polyglot.site/
+
      
      
 output:
